@@ -1,0 +1,21 @@
+wheel
+setuptools
+asyncio
+docutils
+fbs
+future
+PyInstaller==3.4
+PyNaCl
+PyOpenGL
+PyQt5
+PyQt5-sip
+PyQt5-stubs
+typing
+urllib3
+#whois-alt
+zipp
+filehash
+qtwidgets
+# utils
+# elevate
+# hostsman
