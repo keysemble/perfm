@@ -32,8 +32,8 @@
         <rect>
          <x>540</x>
          <y>20</y>
-         <width>411</width>
-         <height>231</height>
+         <width>305</width>
+         <height>234</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -86,6 +86,67 @@
            <widget class="QLabel" name="file_changed_info">
             <property name="text">
              <string>Sat 13 Feb 2021 03∶56∶05 PM EST</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="permissions_label">
+          <property name="text">
+           <string>Permissions:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLabel" name="permissions_label_user">
+            <property name="text">
+             <string>User:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="permissions_info_user">
+            <property name="text">
+             <string>'r', 'w', '-'</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QLabel" name="permissions_label_group">
+            <property name="text">
+             <string>Group:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="permissions_info_group">
+            <property name="text">
+             <string>'r', 'w', '-'</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QLabel" name="permissions_label_other">
+            <property name="text">
+             <string>Other:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="permissions_info_other">
+            <property name="text">
+             <string>'r', 'w', '-'</string>
             </property>
            </widget>
           </item>
