@@ -12,10 +12,7 @@ PyQt5-sip
 PyQt5-stubs
 typing
 urllib3
-#whois-alt
 zipp
 filehash
 qtwidgets
-# utils
-# elevate
-# hostsman
+Pillow

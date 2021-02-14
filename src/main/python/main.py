@@ -2,13 +2,14 @@
 # from fbs_runtime.excepthook.sentry import SentryExceptionHandler
 import os
 import os.path
+from pathlib import Path
 import sys
 # import requests
 from PyQt5 import uic, QtWidgets, QtCore, QtGui
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from PyQt5.QtWidgets import QApplication
+# from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, QWidget, QVBoxLayout
 from fbs_runtime.application_context.PyQt5 import ApplicationContext, \
     cached_property
 
@@ -17,6 +18,9 @@ from permission import *
 
 # example of dynamically loading sqlite from cwd of installer
 target_db = os.path.join(os.path.abspath(os.path.dirname(sys.argv[0])), "somesqlite.db")
+
+home_dir = os.path.expanduser("~")
+somefile = Path(os.path.join("~/.bashrc"))
 
 
 class AppContext(ApplicationContext):
@@ -116,18 +120,31 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # self.show()
 
         self.model = QFileSystemModel()
-        homedir = os.path.expanduser("~")
+        homedir = os.environ['HOME']
         self.model.setRootPath(homedir)
         self.treeView.setModel(self.model)
 
         self.treeView.setAnimated(False)
         self.treeView.setIndentation(20)
         self.treeView.setSortingEnabled(True)
+        self.treeView.clicked.connect(self.open_file_information)
 
-        self.treeView.setWindowTitle("Dir View")
+    def get_file_stuffs(self, file):
+        self.file_name_info.setText(QFileInfo.canonicalFilePath(file))
+        self.file_size_info.setText(QFileInfo.size(file))
+        self.file_changed_info.setText(QFileInfo.lastModified(file))
 
+    def open_file_information(self):
+        index = self.treeView.currentIndex()
+        file_path = self.model.filePath(index)
+        # os.startfile(file_path)
+        file = QFileInfo(file_path)
+        file_modified = file.lastModified().toString()
+        print(str(file.permissions))
+        self.file_name_info.setText(file.canonicalFilePath())
+        self.file_size_info.setText(str(file.size()))
+        self.file_changed_info.setText(str(file_modified))
 
-import sys
 
 if __name__ == '__main__':
     appctxt = AppContext()

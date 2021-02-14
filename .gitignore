@@ -35,17 +35,13 @@ mydjangosite/.idea/
 /stats.txt
 venv/
 __pycache__/
-#wizardassistant-new.db
-#wizardassistant.db
+
 /venv-fbs/
 /target/
-/WizardAssistant.zip
 /src/main/icons/linux/Thumbs.db
 /src/main/icons/base/Thumbs.db
 /src/main/icons/mac/Thumbs.db
 */Thumbs.db
-wizardassistant_license.skm
-*.wizardassistant-new.db
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
