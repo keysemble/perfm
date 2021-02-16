@@ -44,33 +44,3 @@ class HumanBytes:
                 num /= unit_step
 
         return HumanBytes.PRECISION_FORMATS[precision].format("-" if is_negative else "", num, unit)
-
-# print(HumanBytes.format(2251799813685247)) # 2 pebibytes
-# print(HumanBytes.format(1023, precision=2)) # 2 petabytes
-# print(HumanBytes.format(1099511627776)) # 1 tebibyte
-# print(HumanBytes.format(1000000000000, True)) # 1 terabyte
-# print(HumanBytes.format(1000000000, True)) # 1 gigabyte
-# print(HumanBytes.format(4318498233, precision=3)) # 4.022 gibibytes
-# print(HumanBytes.format(4318498233, True, 3)) # 4.318 gigabytes
-# print(HumanBytes.format(-4318498233, precision=2)) # -4.02 gibibytes
-# print()
-# print()
-# print()
-#
-# print(human_size(2251799813685247)) # 2 pebibytes
-# print(human_size(2000000000000000)) # 2 petabytes
-# print(human_size(1099511627776)) # 1 tebibyte
-# print(human_size(1000000000000)) # 1 terabyte
-# print(human_size(1000000000)) # 1 gigabyte
-# print(human_size(4318498233)) # 4.022 gibibytes
-# print(human_size(4318498233)) # 4.318 gigabytes
-# print(human_size(-4318498233)) # -4.02 gibibytes
-
-# path = '/home/onessa/Downloads'
-# #print(shutil.disk_usage(path).used)
-# currentFile = 2341234.23412351235123
-# size = ((currentFile / float(1024)))
-# rounded = str(round(size, 2)) + " kb"
-#
-#
-# print(HumanBytes.format(currentFile, True))
