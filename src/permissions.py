@@ -46,4 +46,4 @@ class FilePerm:
             return pl
 
         self.access_dict = dict([(access, perm_list(read=r, write=w, execute=x)) for access, [r, w, x] in settings.items()])
-        os.chmod(self.filepath, self.get_mode())
+        os.chmod(self.filepath, self.mode())
