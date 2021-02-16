@@ -34,22 +34,16 @@ class FilePerm:
             r, w, x = self.access_dict[access]
             return [r == 'r', w == 'w', x == 'x']
 
-    def update(self, access, read=None, write=None, execute=None):
-        if access in self.access_dict.keys():
-            perm = self.access_dict[access]
-            if read is not None:
-                if read:
-                    perm[0] = 'r'
-                else:
-                    perm[0] = '-'
-            if write is not None:
-                if write:
-                    perm[1] = 'w'
-                else:
-                    perm[1] = '-'
-            if execute is not None:
-                if execute:
-                    perm[2] = 'x'
-                else:
-                    perm[2] = '-'
-            os.chmod(self.filepath, self.get_mode())
+    def update_bitwise(self, settings):
+        def perm_list(read=False, write=False, execute=False):
+            pl = ['-', '-', '-']
+            if read:
+                pl[0] = 'r'
+            if write:
+                pl[1] = 'w'
+            if execute:
+                pl[2] = 'x'
+            return pl
+
+        self.access_dict = dict([(access, perm_list(read=r, write=w, execute=x)) for access, [r, w, x] in settings.items()])
+        os.chmod(self.filepath, self.get_mode())
