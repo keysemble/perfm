@@ -3,6 +3,7 @@ import os
 from enum import Enum
 from collections import namedtuple
 
+
 def octal_permission_digit(rwx):
     digit = 0
     if rwx[0] == 'r':

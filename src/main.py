@@ -3,21 +3,25 @@ import stat
 import sys
 from pathlib import Path
 
-from PyQt5 import QtCore, QtWidgets, uic
+from PyQt5 import QtCore, QtWidgets, uic, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileSystemModel
 from PyQt5.QtCore import QFileInfo
 
 from permissions import FilePerm
+from humanbytes import HumanBytes
 
 home_dir = os.path.expanduser("~")
 qt_creator_file = os.path.join(os.path.abspath(os.path.dirname(sys.argv[0])), "ui", "design_window.ui")
-
+app_icon = os.path.join(os.path.abspath(os.path.dirname(sys.argv[0])), "icons", "Icon.ico")
 DesignWindow, QtBaseClass = uic.loadUiType(qt_creator_file)
+
 
 class PerfmWindow(QMainWindow, DesignWindow):
     def __init__(self):
         super(PerfmWindow, self).__init__()
         self.setupUi(self)
+        self.setWindowTitle('Perfm Filemanager')
+        self.setWindowIcon(QtGui.QIcon(app_icon))
 
         self.model = QFileSystemModel()
         self.model.setRootPath(os.environ['HOME'])
@@ -27,13 +31,15 @@ class PerfmWindow(QMainWindow, DesignWindow):
         self.tree_view.setIndentation(20)
         self.tree_view.setSortingEnabled(True)
         self.tree_view.clicked.connect(self.open_file_information)
+        self.tree_view.resizeColumnToContents(0)
 
     def open_file_information(self):
+        self.tree_view.resizeColumnToContents(0)
         file_path = self.model.filePath(self.tree_view.currentIndex())
         qfile = QFileInfo(file_path)
         file_modified = qfile.lastModified().toString()
         self.file_name_value.setText(qfile.canonicalFilePath())
-        self.file_size_value.setText(str(qfile.size()))
+        self.file_size_value.setText(str(HumanBytes.format(qfile.size(), precision=2)))
         self.last_modified_value.setText(str(file_modified))
         fileperm = FilePerm(file_path)
         r, w, x = fileperm.access_bits('user')
@@ -55,4 +61,3 @@ if __name__ == "__main__":
     window = PerfmWindow()
     window.show()
     sys.exit(app.exec_())
-
