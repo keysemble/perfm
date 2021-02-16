@@ -4,7 +4,9 @@ import sys
 from pathlib import Path
 
 from PyQt5 import QtCore, QtWidgets, uic, QtGui
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileSystemModel, QMessageBox, QStatusBar
+from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileSystemModel, QMessageBox, QStatusBar, QDialog, QStyle, \
+    QAction
 from PyQt5.QtCore import QFileInfo
 
 from permissions import FilePerm
@@ -14,6 +16,19 @@ home_dir = os.path.expanduser('~')
 qt_creator_file = os.path.join(os.path.abspath(os.path.dirname(sys.argv[0])), 'ui', 'design_window.ui')
 app_icon = os.path.join(os.path.abspath(os.path.dirname(sys.argv[0])), 'icons', 'Icon.ico')
 DesignWindow, QtBaseClass = uic.loadUiType(qt_creator_file)
+version = '0.0.1'
+
+
+class AboutDialog(QDialog):
+    def __init__(self, *args, **kwargs):
+        super(AboutDialog, self).__init__(*args, **kwargs)
+        about_ui = os.path.join(os.path.abspath(os.path.dirname(sys.argv[0])), 'ui', "about.ui")
+        # about_ui = QFile(":/ui/ui/about.ui")
+        uic.loadUi(about_ui, self)
+        self.about_app_logo.setPixmap(
+            QPixmap(app_icon))
+        self.about_version_value.setText(version)
+        self.show()
 
 
 class PerfmWindow(QMainWindow, DesignWindow):
@@ -23,7 +38,9 @@ class PerfmWindow(QMainWindow, DesignWindow):
         self.setWindowTitle('Perfm Filemanager')
         self.setWindowIcon(QtGui.QIcon(app_icon))
         self.status_bar = self.statusBar()
+        self.style = self.style()
         self.file_path = ''
+        self.version = version
 
         self.model = QFileSystemModel()
         self.model.setRootPath(os.environ['HOME'])
@@ -36,6 +53,7 @@ class PerfmWindow(QMainWindow, DesignWindow):
         self.tree_view.resizeColumnToContents(0)
 
         self.apply_push_button.clicked.connect(self.apply_checkbox_changes)
+        self.actionAbout.triggered.connect(self.about_dialog)
 
     def open_file_information(self):
         self.tree_view.resizeColumnToContents(0)
@@ -84,6 +102,10 @@ class PerfmWindow(QMainWindow, DesignWindow):
         message_text = f"Applied Permissions to {self.file_path}"
         self.open_file_information()
         self.status_bar.showMessage(message_text, 10000)
+
+    def about_dialog(self):
+        about_perfm = AboutDialog(self)
+        pass
 
 
 if __name__ == '__main__':
