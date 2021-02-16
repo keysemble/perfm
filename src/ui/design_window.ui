@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1247</width>
+    <height>757</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTreeView" name="tree_view">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>681</width>
+      <height>621</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>20</y>
+      <width>481</width>
+      <height>621</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="file_info_vertical_layout">
+     <item>
+      <layout class="QHBoxLayout" name="file_name_horizontal_layout">
+       <item>
+        <widget class="QLabel" name="file_name_label">
+         <property name="text">
+          <string>File Name</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="file_name_value">
+         <property name="text">
+          <string>(Place Holder)</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="file_size_horizontal_layout">
+       <item>
+        <widget class="QLabel" name="file_size_label">
+         <property name="text">
+          <string>File Size</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="file_size_value">
+         <property name="text">
+          <string>(Place Holder)</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="last_modified_horizontal_layout">
+       <item>
+        <widget class="QLabel" name="last_modified_label">
+         <property name="text">
+          <string>Last Modified</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="last_modified_value">
+         <property name="text">
+          <string>(Place Holder)</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QLabel" name="file_permission_label">
+       <property name="text">
+        <string>File Permission</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTabWidget" name="tabWidget">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="bitwise_tab">
+        <attribute name="title">
+         <string>Bitwise</string>
+        </attribute>
+        <widget class="QWidget" name="verticalLayoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>20</y>
+           <width>331</width>
+           <height>321</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="bitwise_layout">
+          <item>
+           <widget class="QLabel" name="user_access_label">
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="text">
+             <string>[User]</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="user_horizontal_layout">
+            <item>
+             <widget class="QCheckBox" name="user_read_checkbox">
+              <property name="layoutDirection">
+               <enum>Qt::LeftToRight</enum>
+              </property>
+              <property name="text">
+               <string>Read</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="user_write_checkbox">
+              <property name="text">
+               <string>Write</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="user_execute_checkbox">
+              <property name="text">
+               <string>Execute</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="group_access_label">
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="text">
+             <string>[Group]</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="group_horizontal_layout">
+            <item>
+             <widget class="QCheckBox" name="group_read_checkbox">
+              <property name="layoutDirection">
+               <enum>Qt::LeftToRight</enum>
+              </property>
+              <property name="text">
+               <string>Read</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="group_write_checkbox">
+              <property name="text">
+               <string>Write</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="group_execute_checkbox">
+              <property name="text">
+               <string>Execute</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="other_access_label">
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="text">
+             <string>[Other]</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="other_horizontal_layout">
+            <item>
+             <widget class="QCheckBox" name="other_read_checkbox">
+              <property name="layoutDirection">
+               <enum>Qt::LeftToRight</enum>
+              </property>
+              <property name="text">
+               <string>Read</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="other_write_checkbox">
+              <property name="text">
+               <string>Write</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="other_execute_checkbox">
+              <property name="text">
+               <string>Execute</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="octal_tab">
+        <attribute name="title">
+         <string>Octal</string>
+        </attribute>
+        <widget class="QWidget" name="gridLayoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>30</y>
+           <width>381</width>
+           <height>141</height>
+          </rect>
+         </property>
+         <layout class="QGridLayout" name="octal_grid_layout">
+          <item row="1" column="2">
+           <widget class="QLabel" name="other_access_label_2">
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="text">
+             <string>[Other]</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="user_access_label_2">
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="text">
+             <string>[User]</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="group_access_label_2">
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="text">
+             <string>[Group]</string>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::AutoText</enum>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QSpinBox" name="user_octal_spin_box"/>
+          </item>
+          <item row="2" column="1">
+           <widget class="QSpinBox" name="group_octal_spin_box"/>
+          </item>
+          <item row="2" column="2">
+           <widget class="QSpinBox" name="other_octal_spin_box"/>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1247</width>
+     <height>47</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -3,53 +3,52 @@ import stat
 import sys
 from pathlib import Path
 
-from PyQt5 import QtWidgets, uic
+from PyQt5 import QtCore, QtWidgets, uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileSystemModel
+from PyQt5.QtCore import QFileInfo
 
 from permissions import FilePerm
 
-target_db = os.path.join(os.path.abspath(os.path.dirname(sys.argv[0])), "somesqlite.db")
 home_dir = os.path.expanduser("~")
-qtCreatorFile = os.path.join(os.path.abspath(os.path.dirname(sys.argv[0])), "ui", "mainwindow.ui")
-UiDesignWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)
+qt_creator_file = os.path.join(os.path.abspath(os.path.dirname(sys.argv[0])), "ui", "design_window.ui")
 
-class PerfmWindow(QMainWindow, UiDesignWindow):
+DesignWindow, QtBaseClass = uic.loadUiType(qt_creator_file)
+
+class PerfmWindow(QMainWindow, DesignWindow):
     def __init__(self):
         super(PerfmWindow, self).__init__()
         self.setupUi(self)
 
         self.model = QFileSystemModel()
-        homedir = os.environ['HOME']
-        self.model.setRootPath(homedir)
-        self.treeView.setModel(self.model)
+        self.model.setRootPath(os.environ['HOME'])
+        self.tree_view.setModel(self.model)
 
-        self.treeView.setAnimated(False)
-        self.treeView.setIndentation(20)
-        self.treeView.setSortingEnabled(True)
-        self.treeView.clicked.connect(self.open_file_information)
-
-    def get_file_stuffs(self, qfile):
-        self.file_name_info.setText(QFileInfo.canonicalFilePath(qfile))
-        self.file_size_info.setText(QFileInfo.size(qfile))
-        self.file_changed_info.setText(QFileInfo.lastModified(qfile))
+        self.tree_view.setAnimated(False)
+        self.tree_view.setIndentation(20)
+        self.tree_view.setSortingEnabled(True)
+        self.tree_view.clicked.connect(self.open_file_information)
 
     def open_file_information(self):
-        index = self.treeView.currentIndex()
-        file_path = self.model.filePath(index)
-        # os.startfile(file_path)
+        file_path = self.model.filePath(self.tree_view.currentIndex())
         qfile = QFileInfo(file_path)
         file_modified = qfile.lastModified().toString()
-        self.file_name_info.setText(qfile.canonicalFilePath())
-        self.file_size_info.setText(str(qfile.size()))
-        self.file_changed_info.setText(str(file_modified))
-        perms = FilePerm(file_path)
-        user_perms = perms.permissions['user']
-        group_perms = perms.permissions['group']
-        other_perms = perms.permissions['other']
-        self.permissions_info_user.setText(''.join(user_perms))
-        self.permissions_info_group.setText(''.join(group_perms))
-        self.permissions_info_other.setText(''.join(other_perms))
-        (perms.__dict__.keys())
+        self.file_name_value.setText(qfile.canonicalFilePath())
+        self.file_size_value.setText(str(qfile.size()))
+        self.last_modified_value.setText(str(file_modified))
+        fileperm = FilePerm(file_path)
+        r, w, x = fileperm.access_bits('user')
+        self.user_read_checkbox.setChecked(r)
+        self.user_write_checkbox.setChecked(w)
+        self.user_execute_checkbox.setChecked(x)
+        r, w, x = fileperm.access_bits('group')
+        self.group_read_checkbox.setChecked(r)
+        self.group_write_checkbox.setChecked(w)
+        self.group_execute_checkbox.setChecked(x)
+        r, w, x = fileperm.access_bits('other')
+        self.other_read_checkbox.setChecked(r)
+        self.other_write_checkbox.setChecked(w)
+        self.other_execute_checkbox.setChecked(x)
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
