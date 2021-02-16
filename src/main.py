@@ -36,7 +36,6 @@ class PerfmWindow(QMainWindow, DesignWindow):
         self.tree_view.resizeColumnToContents(0)
 
         self.apply_push_button.clicked.connect(self.apply_checkbox_changes)
-        self.apply_push_button.clicked.connect(self.open_file_information)
 
     def open_file_information(self):
         self.tree_view.resizeColumnToContents(0)
@@ -83,6 +82,7 @@ class PerfmWindow(QMainWindow, DesignWindow):
         }
         fileperm.update_bitwise(settings)
         message_text = f"Applied Permissions to {self.file_path}"
+        self.open_file_information()
         self.status_bar.showMessage(message_text, 10000)
 
 
