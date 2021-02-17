@@ -66,19 +66,22 @@ class PerfmWindow(QMainWindow, DesignWindow):
         self.file_name_value.setText(qfile.canonicalFilePath())
         self.file_size_value.setText(str(HumanBytes.format(qfile.size(), precision=2)))
         self.last_modified_value.setText(str(file_modified))
+
         fileperm = FilePerm(self.file_path)
-        r, w, x = fileperm.access_bits('user')
-        self.user_read_checkbox.setChecked(r)
-        self.user_write_checkbox.setChecked(w)
-        self.user_execute_checkbox.setChecked(x)
-        r, w, x = fileperm.access_bits('group')
-        self.group_read_checkbox.setChecked(r)
-        self.group_write_checkbox.setChecked(w)
-        self.group_execute_checkbox.setChecked(x)
-        r, w, x = fileperm.access_bits('other')
-        self.other_read_checkbox.setChecked(r)
-        self.other_write_checkbox.setChecked(w)
-        self.other_execute_checkbox.setChecked(x)
+
+        user_checkboxes = (self.user_read_checkbox, self.user_write_checkbox, self.user_execute_checkbox)
+        group_checkboxes = (self.group_read_checkbox, self.group_write_checkbox, self.group_execute_checkbox)
+        other_checkboxes = (self.other_read_checkbox, self.other_write_checkbox, self.other_execute_checkbox)
+        for checkbox, checked in zip(user_checkboxes, fileperm.access_bits('user')):
+            checkbox.setChecked(checked)
+        for checkbox, checked in zip(group_checkboxes, fileperm.access_bits('group')):
+            checkbox.setChecked(checked)
+        for checkbox, checked in zip(other_checkboxes, fileperm.access_bits('other')):
+            checkbox.setChecked(checked)
+
+        spinboxes = (self.user_octal_spin_box, self.group_octal_spin_box, self.other_octal_spin_box)
+        for spinbox, value in zip(spinboxes, fileperm.octal()):
+            spinbox.setValue(value)
 
     def apply_checkbox_changes(self):
         self.tree_view.resizeColumnToContents(0)

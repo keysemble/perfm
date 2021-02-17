@@ -4,7 +4,7 @@ from enum import Enum
 from collections import namedtuple
 
 
-def octal_permission_digit(rwx):
+def perm_octal_digit(rwx):
     digit = 0
     if rwx[0] == 'r':
         digit += 4
@@ -23,11 +23,13 @@ class FilePerm:
         self.access_dict = dict(zip(['user', 'group', 'other'], [list(perm) for perm in permissions]))
 
     def mode(self):
-        octal_digits = [octal_permission_digit(p) for p in self.access_dict.values()]
         mode = 0
-        for shift, octal in enumerate(octal_digits[::-1]):
-            mode += octal << (shift * 3)
+        for shift, digit in enumerate(self.octal()[::-1]):
+            mode += digit << (shift * 3)
         return mode
+
+    def octal(self):
+        return [perm_octal_digit(p) for p in self.access_dict.values()]
 
     def access_bits(self, access):
         if access in self.access_dict.keys():
