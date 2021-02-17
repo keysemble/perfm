@@ -51,6 +51,9 @@ class PerfmWindow(QMainWindow, DesignWindow):
         self.tree_view.setSortingEnabled(True)
         self.tree_view.clicked.connect(self.open_file_information)
         self.tree_view.resizeColumnToContents(0)
+        self.user_octal_spin_box.setRange(0, 7)
+        self.group_octal_spin_box.setRange(0, 7)
+        self.other_octal_spin_box.setRange(0, 7)
 
         self.apply_push_button.clicked.connect(self.apply_checkbox_changes)
         self.actionAbout.triggered.connect(self.about_dialog)
