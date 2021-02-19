@@ -2,7 +2,6 @@ wheel
 setuptools
 asyncio
 docutils
-fbs
 future
 PyInstaller==3.4
 PyNaCl
@@ -14,5 +13,4 @@ typing
 urllib3
 zipp
 filehash
-qtwidgets
 Pillow
