@@ -22,7 +22,7 @@ version = '0.0.1'
 class AboutDialog(QDialog):
     def __init__(self, *args, **kwargs):
         super(AboutDialog, self).__init__(*args, **kwargs)
-        uic.loadUi(os.path.join(project_directory, 'ui', 'about_ui', self)
+        uic.loadUi(os.path.join(project_directory, 'ui', 'about_ui', self))
         self.about_app_logo.setPixmap(QPixmap(app_icon))
         self.about_version_value.setText(version)
         self.show()
@@ -52,7 +52,7 @@ class PerfmWindow(QMainWindow, DesignWindow):
         self.user_octal_spin_box.setRange(0, 7)
         self.group_octal_spin_box.setRange(0, 7)
         self.other_octal_spin_box.setRange(0, 7)
-        
+
         self.apply_push_button.clicked.connect(self.apply_checkbox_changes)
         self.actionAbout.triggered.connect(self.about_dialog)
 
@@ -69,25 +69,25 @@ class PerfmWindow(QMainWindow, DesignWindow):
         fileperm=FilePerm(self.file_path)
 
         user_checkboxes=(
-        	self.user_read_checkbox,
-        	self.user_write_checkbox,
-        	self.user_execute_checkbox
-    	)
+            self.user_read_checkbox,
+            self.user_write_checkbox,
+            self.user_execute_checkbox
+        )
         for checkbox, checked in zip(user_checkboxes, fileperm.access_bits('user')):
             checkbox.setChecked(checked)
 
         group_checkboxes=(
-        	self.group_read_checkbox,
-        	self.group_write_checkbox,
-        	self.group_execute_checkbox
+            self.group_read_checkbox,
+            self.group_write_checkbox,
+            self.group_execute_checkbox
         )
         for checkbox, checked in zip(group_checkboxes, fileperm.access_bits('group')):
             checkbox.setChecked(checked)
 
         other_checkboxes=(
-        	self.other_read_checkbox,
-        	self.other_write_checkbox,
-        	self.other_execute_checkbox
+            self.other_read_checkbox,
+            self.other_write_checkbox,
+            self.other_execute_checkbox
         )
         for checkbox, checked in zip(other_checkboxes, fileperm.access_bits('other')):
             checkbox.setChecked(checked)
