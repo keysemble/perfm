@@ -1,7 +1,5 @@
 import stat
 import os
-from enum import Enum
-from collections import namedtuple
 
 
 def perm_octal_digit(rwx):
